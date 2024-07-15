@@ -1,0 +1,22 @@
+The goal of this project is to use OpenVINO to perform face detection on a given image. The project involves several key steps, including model loading, image preprocessing, inference, and post-processing to visualize the results.
+Initialize OpenVINO Inference Engine
+The OpenVINO Inference Engine is initialized to handle model loading and inference.
+This is done using the Core object from the openvino.runtime module.
+2. Load the Face Detection Model
+The face detection model (in this case, face-detection-adas-0001) is loaded. The model consists of two files: an XML file containing the model architecture and a BIN file containing the model weights.
+The model is read and compiled for the CPU device using OpenVINO’s read_model and compile_model methods.
+3. Load and Preprocess the Input Image
+The input image is loaded using OpenCV’s imread function.
+The image is preprocessed to match the input requirements of the model. This typically involves resizing the image to the model's expected input size, transposing the image data layout from HWC (Height, Width, Channels) to CHW (Channels, Height, Width), and reshaping the image to add a batch dimension.
+4. Create InferRequest Object
+An InferRequest object is created from the compiled model. This object is used to perform inference.
+5. Perform Inference
+Inference is performed on the preprocessed image using the infer method of the InferRequest object.
+The output of the inference is retrieved, which contains the detection results.
+6. Process the Output
+The output is processed to extract the face detection results. Each detection result includes information such as the confidence score and the coordinates of the bounding box around the detected face.
+Only detections with a confidence score above a certain threshold (e.g., 0.5) are considered valid.
+7. Draw Bounding Boxes on Detected Faces
+For each valid detection, a bounding box is drawn around the detected face on the original image using OpenCV’s rectangle function.
+8. Display the Result
+The final image with the drawn bounding boxes is displayed using Matplotlib’s imshow function.
